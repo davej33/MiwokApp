@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,68 +30,66 @@ public class MainActivity extends AppCompatActivity {
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
-        // Find the View that shows the numbers category
-        TextView numbers = (TextView) findViewById(R.id.numbers);
+        // Find numbers TextView
+        TextView numbersClick = (TextView) findViewById(R.id.numbers);
 
-        // Set a click listener on that View
-        numbers.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
+        numbersClick.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
-
-                // Start the new activity
-                startActivity(numbersIntent);
+                Intent numbersPage = new Intent(MainActivity.this, NumbersActivity.class);
+                startActivity(numbersPage);
             }
         });
 
-        // Find the View that shows the family category
-        TextView family = (TextView) findViewById(R.id.family);
+        TextView colorsClick = (TextView) findViewById(R.id.colors);
 
-        // Set a click listener on that View
-        family.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the family category is clicked on.
+        colorsClick.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                // Create a new intent to open the {@link FamilyActivity}
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-
-                // Start the new activity
-                startActivity(familyIntent);
+                Intent colorsPage = new Intent(MainActivity.this, ColorsActivity.class);
+                startActivity(colorsPage);
             }
         });
 
-        // Find the View that shows the colors category
-        TextView colors = (TextView) findViewById(R.id.colors);
+        // find family view
+        TextView familyView = (TextView) findViewById(R.id.family);
 
-        // Set a click listener on that View
-        colors.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the colors category is clicked on.
+        // assign click listener to view
+        familyView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create a new intent to open the {@link ColorsActivity}
-                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
-
-                // Start the new activity
-                startActivity(colorsIntent);
+                Intent familyPage = new Intent(MainActivity.this, FamilyActivity.class);
+                startActivity(familyPage);
             }
         });
 
-        // Find the View that shows the phrases category
-        TextView phrases = (TextView) findViewById(R.id.phrases);
+        // find phrases view
+        TextView phraseView = (TextView) findViewById(R.id.phrases);
 
-        // Set a click listener on that View
-        phrases.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the phrases category is clicked on.
+        // set click listener to textview
+        phraseView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create a new intent to open the {@link PhrasesActivity}
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-
-                // Start the new activity
-                startActivity(phrasesIntent);
+                Intent phrasesPage = new Intent(MainActivity.this, PhrasesActivity.class);
+                startActivity(phrasesPage);
             }
         });
+    }
+
+    public void familyIntent(View view) {
+        Intent goToFamily = new Intent(this, NumbersActivity.class);
+        startActivity(goToFamily);
+    }
+
+    public void colorsIntent(View view) {
+        Intent goToColors = new Intent(this, NumbersActivity.class);
+        startActivity(goToColors);
+    }
+
+    public void phrasesIntent(View view) {
+        Intent goToPhrases = new Intent(this, NumbersActivity.class);
+        startActivity(goToPhrases);
     }
 }
