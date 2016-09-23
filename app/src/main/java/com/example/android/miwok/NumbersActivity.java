@@ -17,8 +17,8 @@ package com.example.android.miwok;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,15 +34,13 @@ public class NumbersActivity extends AppCompatActivity {
 
         ArrayList<String> englishNumbers = new ArrayList<>();
 
-        englishNumbers.addAll(Arrays.asList("one","two","three","four","five","six","seven","eight","nine","ten"));
+        englishNumbers.addAll(Arrays.asList("one", "two", "three", "ur", "five", "six", "seven", "eight", "nine", "ten","eleve","twelve","thirteen","fourteen"));
 
-        LinearLayout numRootView = (LinearLayout) findViewById(R.id.numRootView);
 
-        for(int x=0;x<englishNumbers.size();x++) {
-            TextView wordView = new TextView(this);
-            wordView.setText(englishNumbers.get(x));
-            numRootView.addView(wordView);
-        }
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, englishNumbers);
+        GridView listView = (GridView) findViewById(R.id.list);
+        listView.setAdapter(listAdapter);
     }
+
 }
 
