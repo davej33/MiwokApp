@@ -17,29 +17,38 @@ package com.example.android.miwok;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NumbersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers);
+        setContentView(R.layout.list_view);
 
         // create English numbers array
 
-        ArrayList<String> englishNumbers = new ArrayList<>();
+        ArrayList<Words> words = new ArrayList<Words>();
 
-        englishNumbers.addAll(Arrays.asList("one", "two", "three", "ur", "five", "six", "seven", "eight", "nine", "ten","eleve","twelve","thirteen","fourteen"));
+        // create instances of Words class
+
+        words.add(new Words("one","lutti"));
+        words.add(new Words("two","otiiko"));
+        words.add(new Words("three","tolookosu"));
+        words.add(new Words("four","oyyisa"));
+        words.add(new Words("five","massokka"));
+        words.add(new Words("six","temmokka"));
+        words.add(new Words("seven","kenekaku"));
+        words.add(new Words("eight","kawinta"));
+        words.add(new Words("nine","wo'e"));
+        words.add(new Words("ten","na'aacha"));
 
 
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, englishNumbers);
-        GridView listView = (GridView) findViewById(R.id.list);
-        listView.setAdapter(listAdapter);
+        WordAdapter adapter = new WordAdapter(this, words);
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setAdapter(adapter);
     }
 
 }
