@@ -30,20 +30,20 @@ public class NumbersActivity extends AppCompatActivity {
 
         // create English numbers array
 
-        ArrayList<Words> words = new ArrayList<Words>();
+        ArrayList<Word> words = new ArrayList<Word>();
 
-        // create instances of Words class
+        // create instances of Word class
 
-        words.add(new Words("one","lutti"));
-        words.add(new Words("two","otiiko"));
-        words.add(new Words("three","tolookosu"));
-        words.add(new Words("four","oyyisa"));
-        words.add(new Words("five","massokka"));
-        words.add(new Words("six","temmokka"));
-        words.add(new Words("seven","kenekaku"));
-        words.add(new Words("eight","kawinta"));
-        words.add(new Words("nine","wo'e"));
-        words.add(new Words("ten","na'aacha"));
+        words.add(new Word("one","lutti"));
+        words.add(new Word("two","otiiko"));
+        words.add(new Word("three","tolookosu"));
+        words.add(new Word("four","oyyisa"));
+        words.add(new Word("five","massokka"));
+        words.add(new Word("six","temmokka"));
+        words.add(new Word("seven","kenekaku"));
+        words.add(new Word("eight","kawinta"));
+        words.add(new Word("nine","wo'e"));
+        words.add(new Word("ten","na'aacha"));
 
 
         WordAdapter adapter = new WordAdapter(this, words);

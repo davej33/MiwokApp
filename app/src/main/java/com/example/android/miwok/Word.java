@@ -4,13 +4,13 @@ package com.example.android.miwok;
  * Created by dnj on 9/23/16.
  */
 
-public class Words {
+public class Word {
 
     private String mDefaultTranslation;
 
     private String mMiwokTranslation;
 
-    public Words (String defaultTranslation, String miwokTranslation){
+    public Word(String defaultTranslation, String miwokTranslation){
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
     }
