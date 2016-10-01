@@ -18,6 +18,13 @@ public class Word {
         mImage = image;
     }
 
+    public Word(String defaultTranslation, String miwokTranslation){
+        mDefaultTranslation = defaultTranslation;
+        mMiwokTranslation = miwokTranslation;
+
+    }
+
+
     public String getDefaultTranslation(){
         return mDefaultTranslation;
     }
