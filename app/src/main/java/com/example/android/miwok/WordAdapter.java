@@ -16,6 +16,7 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 public class WordAdapter extends ArrayAdapter<Word>  {
 
     private int mColorResourceID;
+    private int mSongResourceID;
     /**
      * Create a new {@link WordAdapter} object.
      *
@@ -42,6 +44,7 @@ public class WordAdapter extends ArrayAdapter<Word>  {
     public WordAdapter(Context context, ArrayList<Word> words, int colorResourceID) {
         super(context, 0, words);
         mColorResourceID = colorResourceID;
+
     }
 
     @Override
@@ -54,31 +57,22 @@ public class WordAdapter extends ArrayAdapter<Word>  {
         }
 
         // Get the {@link Word} object located at this position in the list
-        Word currentWord = getItem(position);
+        final Word currentWord = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID miwok_text_view.
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.miwok_text_view);
-
-        // Get the Miwok translation from the currentWord object and set this text on
-        // the Miwok TextView.
         miwokTextView.setText(currentWord.getMiwokTranslation());
 
         // Find the TextView in the list_item.xml layout with the ID default_text_view.
         TextView defaultTextView = (TextView) listItemView.findViewById(R.id.default_text_view);
-
-        // Get the default translation from the currentWord object and set this text on
-        // the default TextView.
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
-
         if (currentWord.hasImage()) {
             imageView.setImageResource(currentWord.getImage());
             imageView.setVisibility(View.VISIBLE);
-
         } else {
             imageView.setVisibility(View.GONE);}
-
 
         // Return the whole list item layout (containing 2 TextViews) so that it can be shown in
         // the ListView.
@@ -86,6 +80,13 @@ public class WordAdapter extends ArrayAdapter<Word>  {
         View textContainer =  listItemView.findViewById(R.id.text_container);
         int color = ContextCompat.getColor(getContext(), mColorResourceID);
         textContainer.setBackgroundColor(color);
+        textContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MediaPlayer wordPlayer = MediaPlayer.create(getContext(), currentWord.getSong());
+                wordPlayer.start();
+            }
+        });
 
         return listItemView;
     }

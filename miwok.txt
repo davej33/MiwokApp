@@ -1,0 +1,7 @@
+miwok steps
+
+1. Create an ArrayList using constructor
+    
+    Obj Type/data type /variable  
+--- ArrayList<String>  colorArray = new ArrayList<String>;
+2. 
