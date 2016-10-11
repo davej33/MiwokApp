@@ -15,20 +15,32 @@
  */
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
 
+    MediaPlayer mMediaPlayer;
+
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
 
         words.add(new Word("red", "weṭeṭṭi",R.drawable.color_red, R.raw.color_red));
         words.add(new Word("mustard yellow", "chiwiiṭә",R.drawable.color_mustard_yellow,R.raw.color_mustard_yellow));
@@ -39,10 +51,27 @@ public class ColorsActivity extends AppCompatActivity {
         words.add(new Word("black", "kululli",R.drawable.color_black, R.raw.color_black));
         words.add(new Word("white", "kelelli",R.drawable.color_white, R.raw.color_white));
 
+        WordAdapter adapter = new WordAdapter(this, words, R.color.category_colors);
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                releaseMediaPlayer();
+                Word word = words.get(position);
+                mMediaPlayer = MediaPlayer.create(ColorsActivity.this, word.getAudio());
+                mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            }
+        });
+    }
 
-    WordAdapter adapter = new WordAdapter(this, words, R.color.category_colors);
-    ListView listView = (ListView) findViewById(R.id.list_view);
-    listView.setAdapter(adapter);
+    private void releaseMediaPlayer(){
+        if(mMediaPlayer != null){
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+
+        }
     }
 }

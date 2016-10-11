@@ -15,20 +15,30 @@
  */
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class PhrasesActivity extends AppCompatActivity {
 
+    private MediaPlayer mMediaplayer;
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
         words.add(new Word("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
         words.add(new Word("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
         words.add(new Word("My name is...", "oyaaset...", R.raw.phrase_my_name_is));
@@ -43,5 +53,23 @@ public class PhrasesActivity extends AppCompatActivity {
         WordAdapter adapter = new WordAdapter(this, words, R.color.category_phrases);
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                releaseMediaPlayer();
+                Word word = words.get(position);
+                mMediaplayer = MediaPlayer.create(PhrasesActivity.this, word.getAudio());
+                mMediaplayer.start();
+                mMediaplayer.setOnCompletionListener(mCompletionListener);
+            }
+        });
+    }
+
+    private void releaseMediaPlayer(){
+        if(mMediaplayer != null){
+            mMediaplayer.release();
+            mMediaplayer = null;
+        }
     }
 }

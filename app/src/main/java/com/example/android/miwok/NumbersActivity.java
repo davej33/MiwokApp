@@ -71,7 +71,7 @@ public class NumbersActivity extends AppCompatActivity {
                 // clear MediaPlayer resources
                 mediaPlayerRelease();
 
-                // create Word object to get position of list item selected
+                // get the Word object of the item selected
                 Word word = words.get(position);
 
                 // retrieve audio for selected item
