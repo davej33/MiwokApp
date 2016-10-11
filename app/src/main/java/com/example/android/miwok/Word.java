@@ -50,5 +50,7 @@ public class Word {
         return mImageResourceId != NO_IMAGE_PROVIDED;
     }
 
-    public int getSong(){ return mSongResourceID;}
+    public int getAudio(){ return mSongResourceID;}
+
+
 }

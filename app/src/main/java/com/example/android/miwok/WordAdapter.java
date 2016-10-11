@@ -31,15 +31,16 @@ import java.util.ArrayList;
  * {@link WordAdapter} is an {@link ArrayAdapter} that can provide the layout for each list item
  * based on a data source, which is a list of {@link Word} objects.
  */
-public class WordAdapter extends ArrayAdapter<Word>  {
+public class WordAdapter extends ArrayAdapter<Word> {
 
     private int mColorResourceID;
-    private int mSongResourceID;
+    MediaPlayer wordPlayer;
+
     /**
      * Create a new {@link WordAdapter} object.
      *
      * @param context is the current context (i.e. Activity) that the adapter is being created in.
-     * @param words is the list of {@link Word}s to be displayed.
+     * @param words   is the list of {@link Word}s to be displayed.
      */
     public WordAdapter(Context context, ArrayList<Word> words, int colorResourceID) {
         super(context, 0, words);
@@ -72,22 +73,19 @@ public class WordAdapter extends ArrayAdapter<Word>  {
             imageView.setImageResource(currentWord.getImage());
             imageView.setVisibility(View.VISIBLE);
         } else {
-            imageView.setVisibility(View.GONE);}
+            imageView.setVisibility(View.GONE);
+        }
 
         // Return the whole list item layout (containing 2 TextViews) so that it can be shown in
         // the ListView.
 
-        View textContainer =  listItemView.findViewById(R.id.text_container);
+        final View textContainer = listItemView.findViewById(R.id.text_container);
         int color = ContextCompat.getColor(getContext(), mColorResourceID);
         textContainer.setBackgroundColor(color);
-        textContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MediaPlayer wordPlayer = MediaPlayer.create(getContext(), currentWord.getSong());
-                wordPlayer.start();
-            }
-        });
+
 
         return listItemView;
     }
+
+
 }
