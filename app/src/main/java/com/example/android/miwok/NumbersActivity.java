@@ -31,7 +31,7 @@ public class NumbersActivity extends AppCompatActivity {
     private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener(){
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
-            mediaPlayerRelease();
+            releaseMediaPlayer();
         }
     };
 
@@ -69,7 +69,7 @@ public class NumbersActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 // clear MediaPlayer resources
-                mediaPlayerRelease();
+                releaseMediaPlayer();
 
                 // get the Word object of the item selected
                 Word word = words.get(position);
@@ -86,12 +86,18 @@ public class NumbersActivity extends AppCompatActivity {
         });
     }
 
-    public void mediaPlayerRelease() {
+    public void releaseMediaPlayer() {
         if (mMediaPlayer != null) {
             mMediaPlayer.release();
             mMediaPlayer = null;
         }
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
 }
 
 

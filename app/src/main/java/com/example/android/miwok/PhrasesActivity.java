@@ -72,4 +72,10 @@ public class PhrasesActivity extends AppCompatActivity {
             mMediaplayer = null;
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
 }
